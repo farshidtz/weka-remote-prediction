@@ -5,28 +5,22 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.*;
 
 import weka.classifiers.Classifier;
-import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.SerializationHelper;
 
 
 /**
- * A server program which accepts requests from clients to
- * capitalize strings.  When clients connect, a new thread is
- * started to handle an interactive dialog in which the client
- * sends in a string and the server thread sends back the
- * capitalized version of the string.
- *
- * The program is runs in an infinite loop, so shutdown in platform
- * dependent.  If you ran it from a console window with the "java"
- * interpreter, Ctrl+C generally will shut it down.
+ * A socket server on top of Weka.jar enabling efficient 
+ * classification of test data from any programming language 
+ * other than Java.
+ * 
+ * Socket server copyrights goes to: 
+ * http://cs.lmu.edu/~ray/notes/javanetexamples/
  */
 public class WekaPredictor {
 
@@ -68,7 +62,7 @@ public class WekaPredictor {
 
 
     /**
-     * A private thread to handle capitalization requests on a particular
+     * A private thread to handle requests on a particular
      * socket.  The client terminates the dialogue by sending a single line
      * containing only a period.
      */
@@ -127,6 +121,7 @@ public class WekaPredictor {
                         new InputStreamReader(socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 
+                // First message should contain the pre-trained model file path
                 String modelFilePath = in.readLine();
                 if (modelFilePath == null || modelFilePath.equals(".")) {
                 	throw new FileNotFoundException(".model file path not specified");
@@ -135,7 +130,7 @@ public class WekaPredictor {
                 Classifier cls = (Classifier) SerializationHelper.read(modelFilePath);
                 
                 // Send a welcome message to the client.
-                out.println("Hello, you are client #" + clientNumber + ".");
+                out.println("Connected to Weka Server as client#" + clientNumber + ".");
 
                 // Get messages from the client, line by line; return them
                 // capitalized
@@ -146,9 +141,7 @@ public class WekaPredictor {
                     }
                     //log(input);
                     //out.println(input.toUpperCase());
-                    
-                    
-                    
+                                        
                     Instance inst= new DenseInstance(14);
                     JSONObject obj = new JSONObject(input);
                     JSONArray attr = obj.getJSONArray("attributes");
