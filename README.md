@@ -1,5 +1,5 @@
 ## Description
-A socket server on top of Weka.jar enabling efficient classification of test data using any programming language capable of acting as a socket client
+A socket server on top of [Weka](http://www.cs.waikato.ac.nz/ml/weka/) allowing non-Java applications to obtain predictions/classifications efficiently. This approach (unlike the [command line Weka interface](https://weka.wikispaces.com/Making+predictions)) does not require loading of the model and test data as text files for each prediction. Instead the model is set once and the test data gets submitted over a socket, followed by an immediate reply containing the prediction.
 
 ## Run the server using the executable jar
 
@@ -31,3 +31,7 @@ java -jar .\socketweka.jar 9100
 
 {"index":1,"dist":[1.4402003129542426E-10,0.9991183106175616,4.386999171079445E-4,4.4298932131057593E-4],"label":"Idle"}
 ```
+
+## Download
+### Executable jar containing Weka 3.7.12:
+[WekaRemote-3.7.12.jar](https://bitbucket.org/farshidt/weka-remote-prediction/downloads/WekaRemote-3.7.12.jar)
