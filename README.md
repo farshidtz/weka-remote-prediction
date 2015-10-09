@@ -4,7 +4,7 @@ A socket server on top of [Weka](http://www.cs.waikato.ac.nz/ml/weka/) allowing 
 ## Run the server using the executable jar
 
 ```bash
-java -jar .\WekaRemote-3.7.12.jar 9100
+java -jar .\WekaRemote.jar 9100
 ```
 
 
