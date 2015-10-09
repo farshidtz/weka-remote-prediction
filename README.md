@@ -27,5 +27,4 @@ java -jar .\WekaRemote-3.7.12.jar 9100
 ```
 
 ## Download
-### Executable jar containing Weka 3.7.12:
-[WekaRemote-3.7.12.jar](https://bitbucket.org/farshidt/weka-remote-prediction/downloads/WekaRemote-3.7.12.jar)
+Please see the [Releases page](https://github.com/farshidtz/weka-remote-prediction/releases).
